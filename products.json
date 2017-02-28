@@ -1,0 +1,99 @@
+[
+    {
+        "id": 1,
+        "name": "Strategy and digitalization",
+        "url": "http://knowit.se/tjanster/experience/strategi-och-digitalisering/",
+        "group": "experience"
+    },
+    {
+        "id": 2,
+        "name": "Brand and communication",
+        "url": "http://knowit.se/tjanster/experience/varumarke-och-kommunikation/",
+        "group": "experience"
+    },
+    {
+        "id": 3,
+        "name": "Design and inovation",
+        "url": "http://knowit.se/tjanster/experience/design-och-innovation/",
+        "group": "experience"
+    },
+    {
+        "id": 4,
+        "name": "Digital marketing",
+        "url": "http://knowit.se/tjanster/experience/digital-marknadsforing/",
+        "group": "experience"
+    },
+    {
+        "id": 5,
+        "name": "Web development and platforms",
+        "url": "http://knowit.se/tjanster/experience/webutveckling-och-plattformar/",
+        "group": "experience"
+    },
+    {
+        "id": 6,
+        "name": "eCommerce",
+        "url": "http://knowit.se/tjanster/experience/ehandel/",
+        "group": "experience"
+    },
+    {
+        "id": 7,
+        "name": "Mobile solutions",
+        "url": "http://knowit.se/tjanster/experience/mobila-losningar/",
+        "group": "experience"
+    },
+    {
+        "id": 8,
+        "name": "Application Development and Life Cycle Management",
+        "url": "http://knowit.se/tjanster/solutions/application-development-and-life-cycle-management/",
+        "group": "solutions"
+    },
+    {
+        "id": 9,
+        "name": "Architecture Services",
+        "url": "http://knowit.se/tjanster/solutions/architecture/",
+        "group": "solutions"
+    },
+    {
+        "id": 10,
+        "name": "Cloud First",
+        "url": "http://knowit.se/tjanster/solutions/cloud-first/",
+        "group": "solutions"
+    },
+    {
+        "id": 11,
+        "name": "Business Intelligence",
+        "url": "http://knowit.se/tjanster/solutions/business-intelligence/",
+        "group": "solutions"
+    },
+    {
+        "id": 12,
+        "name": "Quality Assurance",
+        "url": "http://knowit.se/tjanster/solutions/quality-assurance/",
+        "group": "solutions"
+    },
+    {
+        "id": 13,
+        "name": "Mobile first",
+        "url": "http://knowit.se/tjanster/solutions/mobile/",
+        "group": "solutions"
+    },
+    {
+        "id": 14,
+        "name": "Digital transformation",
+        "url": "http://knowit.se/tjanster/solutions/digital-transformation/",
+        "group": "solutions"
+    },
+    {
+        "id": 15,
+        "name": "Robotics",
+        "url": "http://knowit.se/tjanster/solutions/robotic-process-automation/",
+        "group": "solutions"
+    },
+    {
+        "id": 16,
+        "name": "Defence solutions",
+        "url": "http://knowit.se/tjanster/solutions/defence-solutions/",
+        "group": "solutions"
+    }
+]
+

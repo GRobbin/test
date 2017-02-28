@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^products/?$ products.php
+    RewriteRule ^products/s/([A-Za-z0-9-_]+)/?$ products.php&s=$1
+</ifModule>
