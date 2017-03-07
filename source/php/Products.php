@@ -31,3 +31,19 @@ class Products
         return $search->result;
     }
 }
+class SearchEngine
+{
+    /**
+     * Search algoritm
+     * @param  
+     * @return 
+     */
+
+    public $result = '';
+
+    public function __construct($p, $q, $arr)
+    {
+            $x = explode(' ', $q);
+            $this->result = $x;
+
+    }
