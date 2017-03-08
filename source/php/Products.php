@@ -43,13 +43,13 @@ class SearchEngine
 
     public function __construct($p, $q, $arr)
     { 
-        
 
             foreach($p as $item)
             {
                 $match = $item->name;
-
-                if(preg_match("/\b$q\b/i", $match))
+                $regex = "/$q/i";
+                
+                if(preg_match($regex, $match))
                 {
                     print_r($item);
 
