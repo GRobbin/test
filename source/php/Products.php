@@ -60,68 +60,58 @@ class SearchEngine
         $q1 = '';
         $q2 = '';
          
-        if ($arr_count == 2) //Om fler än ett ord
+        if ($arr_count == 2) //If more then one word
         { 
-            $first_str = strlen($count[0]); //Spara ord 1
-            $second_str = strlen($count[1]); //Spara ord 2
+            $first_str = strlen($count[0]); //Save first search word
+            $second_str = strlen($count[1]); //Save second search word
             
-            if ($first_str > 2 && $second_str > 2) //Om fler bokstäver än två
+            if ($first_str > 2 && $second_str > 2) //If more characters than two
             {
-                $str_count = 3; //Str_count = tre ord
+                $str_count = 3; 
 
 
-                //Kolla om $q har två ord och om de orden har två bokstäver eller mer
+                //Check if query has two words and if their length = > 3
                 if ($arr_count == 2 && $str_count > 2 ) 
                 { 
-                    $q1 = $count[0]; //Spara första ordet
-                    $q2 = $count[1]; //Spara andra ordet
+                    $q1 = $count[0]; //Save first search word
+                    $q2 = $count[1]; //Save second search word
                     
 
 
                 }
             }    
-            else //Om två ord men otillräckligt med bokstäver
+            else //If two words but not enough characters
             {
             $q1 = $q; 
             $q2 = $q1;
 
             }           
         }
-        else //Om $q inte har två ord. Ge samma värde till q2 och q2
+        else //If query has less than two words -> assign same value to $q1 and $q2
         {
         $q1 = $q; 
         $q2 = $q1;
         }
 
-        //If not pass on $q to searchalg
-
-
-        $test = SearchEngine::explode_query($q);
- 
+        //If not pass on $q to search alg.
 
 
 
         //Loop through array
         $result = SearchEngine::loop_arr($p, $q1, $q2);
                 
-                $this->result = $result;
-
+    
         //Filter negative search word
+        $test = SearchEngine::filter_array($result, $negative_query);
+       
+        $super = SearchEngine::check_diff_multi($result, $test);
+
+        print_r($super);
+        // $this->result = $filter_results;
+
         ob_end_flush();
     }
 
-    /**
-     * Explodes query
-     * @param  
-     * @return
-     */
-
-    public static function explode_query($e)
-    {
-        $arr = explode(' ', $e);
-
-        return $arr;
-    }
 
     /**
      * Extract negative search word
@@ -152,6 +142,7 @@ class SearchEngine
     {
             $result = '';
             $second_q = $second_q;
+            $arr = array();
 
             foreach($p as $item)
             {
@@ -160,10 +151,50 @@ class SearchEngine
 
                 if(preg_match($regex, $match))
                 {
-                    $result = print_r($item); //Varför behövs printf?
+                    $arr[] = $item; //Store match in array
                 }
 
             }
-            return $result;
+            return $arr;
     }
+    
+    public static function filter_array($p, $q)
+    {
+            $arr = array();
+
+            foreach($p as $item)
+            {
+                $match = $item->name;
+                $regex = "/$q/i";
+
+                if(preg_match($regex, $match))
+                {
+                    $arr[] = $item; //Store match in array
+                }
+
+            }
+            return $arr;
+    }    
+    public function check_diff_multi($array1, $array2){
+            $result = array();
+            
+            foreach($array1 as $key => $val) 
+            {
+                 if(isset($array2[$key]))
+                 {
+                   
+                   if(is_array($val) && $array2[$key])
+                    {
+                    $result[$key] = check_diff_multi($val, $array2[$key]);
+                    }
+                 } 
+                    
+                    else 
+                    {
+                    $result[$key] = $val;
+                    }
+            }
+
+            return $result;
+}
 }
