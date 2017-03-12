@@ -48,7 +48,7 @@ class SearchEngine
 
         // If query has negative search word
         // return negative word to filter out
-        $negative_query = SearchEngine::negative_query($q);
+
 
         // If $q has two words, each at least three charcters 
         // explode search words into seperate variables
@@ -75,9 +75,6 @@ class SearchEngine
                 { 
                     $q1 = $count[0]; //Save first search word
                     $q2 = $count[1]; //Save second search word
-                    
-
-
                 }
             }    
             else //If two words but not enough characters
@@ -93,21 +90,12 @@ class SearchEngine
         $q2 = $q1;
         }
 
-        //If not pass on $q to search alg.
-
-
-
         //Loop through array
-        $result = SearchEngine::loop_arr($p, $q1, $q2);
-                
-    
-        //Filter negative search word
-        $test = SearchEngine::filter_array($result, $negative_query);
-       
-        $super = SearchEngine::check_diff_multi($result, $test);
+        $negative_query = SearchEngine::negative_query($q);
+        $result = SearchEngine::loop_arr($p, $q1, $q2, $negative_query);
 
-        print_r($super);
-        // $this->result = $filter_results;
+        print_r($result);
+ 
 
         ob_end_flush();
     }
@@ -138,11 +126,23 @@ class SearchEngine
         return $query;
     }
 
-    public static function loop_arr($p, $first_q, $second_q)
+    /**
+     * Loop through json and filter if negative search word
+     * @param
+     * @return 
+     */
+
+    public static function loop_arr($p, $first_q, $second_q, $negative_query)
     {
-            $result = '';
-            $second_q = $second_q;
-            $arr = array();
+        $second_q = $second_q;
+        $arr = array();
+
+        usort($p, function($a, $b) { //Sort the array using a user defined function
+        return $a->name > $b->name; //Compare the scores
+        }); 
+        
+        if (empty($negative_query))
+        {
 
             foreach($p as $item)
             {
@@ -155,46 +155,58 @@ class SearchEngine
                 }
 
             }
-            return $arr;
+            return $arr;       
+        }
+        else 
+        {
+
+         $filter = SearchEngine::filter_query($p, $first_q, $second_q, $negative_query);
+
+         return $filter;
+       
+        }
+
     }
     
-    public static function filter_array($p, $q)
+    /**
+     * Filter 
+     * @param
+     * @return Returns negative query
+     */
+
+    public static function filter_query($p, $first_q, $second_q, $negative_query)
     {
-            $arr = array();
+        $filter = array();
+        
+        foreach($p as $elementKey)
+        {
+            $match = $elementKey->name;
+            $regex = "/($first_q|$second_q\w{3,})/i";
 
-            foreach($p as $item)
+            if(preg_match($regex, $match))
             {
-                $match = $item->name;
-                $regex = "/$q/i";
+                $arr[] = $elementKey; //Store match in array
+            }
+        }
 
-                if(preg_match($regex, $match))
+        foreach($arr as $elementKey => $element) 
+        {
+            foreach($element as $valueKey => $value) 
                 {
-                    $arr[] = $item; //Store match in array
-                }
-
-            }
-            return $arr;
-    }    
-    public function check_diff_multi($array1, $array2){
-            $result = array();
             
-            foreach($array1 as $key => $val) 
-            {
-                 if(isset($array2[$key]))
-                 {
-                   
-                   if(is_array($val) && $array2[$key])
-                    {
-                    $result[$key] = check_diff_multi($val, $array2[$key]);
-                    }
-                 } 
-                    
-                    else 
-                    {
-                    $result[$key] = $val;
-                    }
-            }
+            $match = $element->name;
+            $regex = "/$negative_query/i";
 
-            return $result;
-}
+            if(preg_match($regex, $match))
+                    {                            
+                //delete this particular object from the $array
+                unset($arr[$elementKey]);
+                    } 
+                }
+        }
+
+        $filter = $arr;
+        
+        return $filter;
+    } 
 }
