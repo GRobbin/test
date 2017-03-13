@@ -52,8 +52,10 @@ class SearchEngine
 
         // If $q has two words, each at least three charcters 
         // explode search words into seperate variables
-        $count = str_word_count($q, 1);
-        $arr_count = count($count);
+        $count_arr = explode(' ', $q);
+        $count = array_map('trim',$count_arr);
+        $arr_count = count($count_arr);
+
         
         $arr_match = 2;
         $str_count = '';
@@ -79,27 +81,31 @@ class SearchEngine
             }    
             else //If two words but not enough characters
             {
-            $count = str_word_count($q, 1);
+            $count = explode(' ', $q);
             $q1 = $count[0];
             $q2 = $q1;
 
             }           
         }
-        else //If query has less than two words -> assign same value to $q1 and $q2
+        else if ($arr_count == 3) 
         {
-        $remove_whitespace = str_replace(' ','',$q);
-        $q1 = $remove_whitespace; 
+        $q1 = $q; 
         $q2 = $q1;
         }
-
+        //If query has less than two words -> assign same value to $q1 and $q2
+        else
+        {
+        $trim_arr = str_replace(' ','',$q);
+        $q1 = $trim_arr; 
+        $q2 = $q1;
+        }
         //Loop through array
         $negative_query = SearchEngine::negative_query($q);
         $result = SearchEngine::loop_arr($p, $q1, $q2, $negative_query);
 
         $this->result = $result;
-        
-        return $result;
- 
+
+        // print_r($q);
 
         ob_end_flush();
     }
@@ -188,6 +194,7 @@ class SearchEngine
     public static function filter_query($p, $first_q, $second_q, $negative_query)
     {
         $filter = array();
+        $arr = array();
         
         foreach($p as $elementKey)
         {
