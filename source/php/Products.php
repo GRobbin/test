@@ -56,28 +56,22 @@ class SearchEngine
         $count = array_map('trim',$count_arr);
         $arr_count = count($count_arr);
 
-        
         $arr_match = 2;
         $str_count = '';
         $q1 = '';
         $q2 = '';
          
-        if ($arr_count == 2) //If more then one word
+        if ($arr_count > 1) //If more then one word
         { 
             $first_str = strlen($count[0]); //Save first search word
             $second_str = strlen($count[1]); //Save second search word
             
             if ($first_str > 2 && $second_str > 2) //If more characters than two
             {
-                $str_count = 3; 
 
-
-                //Check if query has two words and if their length = > 3
-                if ($arr_count == 2 && $str_count > 2 ) 
-                { 
                     $q1 = $count[0]; //Save first search word
                     $q2 = $count[1]; //Save second search word
-                }
+                
             }    
             else //If two words but not enough characters
             {
@@ -87,16 +81,16 @@ class SearchEngine
 
             }           
         }
-        else if ($arr_count == 3) 
-        {
-        $q1 = $q; 
-        $q2 = $q1;
-        }
+        // else if ($arr_count == 3) 
+        // {
+        // $trim_arr = str_replace('-','',$q);
+        // $q1 = $trim_arr; 
+        // $q2 = $q1;
+        // }
         //If query has less than two words -> assign same value to $q1 and $q2
         else
         {
-        $trim_arr = str_replace(' ','',$q);
-        $q1 = $trim_arr; 
+        $q1 = $q; 
         $q2 = $q1;
         }
         //Loop through array
@@ -105,7 +99,9 @@ class SearchEngine
 
         $this->result = $result;
 
-        // print_r($q);
+        // print_r($q1);
+        // print_r($q2);
+
 
         ob_end_flush();
     }
