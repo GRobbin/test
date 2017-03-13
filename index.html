@@ -25,32 +25,30 @@
     <script src="./dist/js/app.dev.js"></script>
 </head>
 <body>
-    <header>
-        <img src="http://knowit.se/globalassets/system/icons-and-logotypes/knowit-logotypes/knowit-logo-b.png/Large50" alt="Knowit">
+    <header class="banner">
+        <img class="banner" src="http://knowit.se/globalassets/system/icons-and-logotypes/knowit-logotypes/knowit-logo-b.png/Large50" alt="Knowit">
     </header>
 
-    <main>
+    <main class="col-xs-12 wrap">
         <div class="container">
             <form action="#" class="search">
-                <div class="form-group form-group-inline">
-                    <label>Search:</label>
-                    <input type="search" name="s">
-                    <input type="submit" value="Search">
+                <div class="input-group form-group form-group-inline">
+                    <input type="search" class="form-control" placeholder="Search" name="s">
                 </div>
             </form>
 
-            <table>
+            <table class="search-table">
                 <tr>
                     <th><strong>Service</strong></th>
                     <th><strong>Group</strong></th>
-                    <th></th>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>{{ name }}</td>
-                    <td>{{ group }}</td>
-                    <td><a href="{{ url }}">Read more</a></td>
-                </tr>
+
             </table>
+        </div>
+        <div class="col-xs-12 entry-content">
+            <div class="load">
+            </div>
         </div>
     </main>
 </body>
