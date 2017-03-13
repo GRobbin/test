@@ -1,15 +1,24 @@
+.banner {
+	background: white;
+}
+.wrap {
+    margin-top: 15px;
+}
 header > img {
     display: block;
     margin: auto;
-    padding: 30px 0px;
+    padding: 30px 0;
 }
 .load {
-	margin: 0 auto;
-	max-width: 514px;
+	margin: 5px auto;
+	max-width: 574px;
+	width: 100%;
+	background: white;
+	padding: 30px;
 }
 table.search-table {
     margin: 0 auto;
-    max-width: 514px;
+    max-width: 574px;
     width: 100%;
 }
 .form-group.form-group-inline {
@@ -18,12 +27,15 @@ table.search-table {
     padding: 15px 0;
     width: 100%;
 }
-table.search-table th:nth-of-type(2n) strong {
-    margin-left: 2px;
+table.search-table th:nth-of-type(1n) strong {
+    margin-left: 30px;
 }
-table.search-table th:nth-of-type(2n){
-	width: 32%;
+table.search-table th:nth-of-type(1n){
+	width: 62%;
 }
 .load td:nth-of-type(2n) {
     padding: 0 15px;
+}
+.load td:nth-child(1) {
+    width: 67%;
 }
