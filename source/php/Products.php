@@ -124,7 +124,12 @@ class SearchEngine
 
             if (preg_match($regex, $match))
             {
-                $query = preg_replace("/-/", "", $i);
+                $result = preg_replace("/-/", "", $i);
+            
+                if (strlen($result) > 2)
+                {
+                    $query = $result;
+                }
             }
 
             
@@ -187,7 +192,7 @@ class SearchEngine
         foreach($p as $elementKey)
         {
             $match = $elementKey->name;
-            $regex = "/($first_q|$second_q\w{3,})/i";
+            $regex = "/($first_q|$second_q\w)/i";
 
             if(preg_match($regex, $match))
             {
