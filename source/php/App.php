@@ -11,6 +11,7 @@ define('KNOWIT_TOOLS_TEST_PATH', dirname(__FILE__) . '/');
 define('PRODUCTS_JSON', dirname(dirname(dirname(__FILE__))) . '/products.json');
 
 require_once KNOWIT_TOOLS_TEST_PATH . 'Vendor/Psr4ClassLoader.php';
+require_once KNOWIT_TOOLS_TEST_PATH . '/search.php';
 
 // Instantiate and register the autoloader
 $loader = new KnowitToolsTest\Vendor\Psr4ClassLoader();
