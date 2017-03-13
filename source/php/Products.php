@@ -39,7 +39,7 @@ class SearchEngine
      */
 
 {
-    public $result = '';
+    public $result;
 
     public function __construct($p, $q, $arr)
     
@@ -79,14 +79,16 @@ class SearchEngine
             }    
             else //If two words but not enough characters
             {
-            $q1 = $q; 
+            $count = str_word_count($q, 1);
+            $q1 = $count[0];
             $q2 = $q1;
 
             }           
         }
         else //If query has less than two words -> assign same value to $q1 and $q2
         {
-        $q1 = $q; 
+        $remove_whitespace = str_replace(' ','',$q);
+        $q1 = $remove_whitespace; 
         $q2 = $q1;
         }
 
@@ -94,7 +96,9 @@ class SearchEngine
         $negative_query = SearchEngine::negative_query($q);
         $result = SearchEngine::loop_arr($p, $q1, $q2, $negative_query);
 
-        print_r($result);
+        $this->result = $result;
+        
+        return $result;
  
 
         ob_end_flush();
@@ -112,17 +116,19 @@ class SearchEngine
         $arr = explode(' ', $query);
         $query = '';
         
-        foreach ($arr as $i){
+        foreach ($arr as $i)
+        {
            
             $regex = "/-/";
             $match = $i;
 
             if (preg_match($regex, $match))
-            {;
-            $query = preg_replace("/-/", "", $i);
+            {
+                $query = preg_replace("/-/", "", $i);
             }
-        }
 
+            
+        }
         return $query;
     }
 
@@ -147,7 +153,7 @@ class SearchEngine
             foreach($p as $item)
             {
                 $match = $item->name;
-                $regex = "/($first_q|$second_q\w{3,})/i";
+                $regex = "/($first_q|$second_q\w)/i";
 
                 if(preg_match($regex, $match))
                 {
