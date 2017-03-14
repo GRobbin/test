@@ -24,7 +24,14 @@ class SearchEngine
         /* Make sure not to save temp variables */
         ob_start(); 
 
-        /* Store how many words $q has and trim each array from blanckspace */
+        /* If $q contains none alphanumerical characters except '-' die search query,
+         * in order to prevent any possibility of manipulating code via AJAX
+         */
+        if (!preg_match('/^[a-zA-Z0-9+\s -]+$/', $q)) {
+            die;
+        }
+
+        /* Store how many words $q has and trim each array from blanckspaces */
         $count_arr = explode(' ', $q);
         $count = array_map('trim',$count_arr);
         $arr_count = count($count_arr);
