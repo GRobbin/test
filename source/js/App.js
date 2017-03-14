@@ -1,7 +1,8 @@
 $(function(){ 
   //jQuery code here 
      $.getJSON("products.php", function(data){ 
-            /* loop through array */
+
+            /* Loop through array and append it to table */
             $.each(data, function(index, d){            
                 $('<tr />').append(
                 $('<td />').text(d.name),
@@ -10,7 +11,8 @@ $(function(){
                 ).appendTo('.load');
             });
         });
-     /* loop through array on search */
+
+     /* Loop through array on search and replace existing results */
      $('input[type=search]').keyup(function(){
         $('.load').empty();
         var value = $( this ).val();

@@ -1,0 +1,13 @@
+{	
+    "name": "robin/developer",
+    "description": "Knowit developer test",
+    "config": {
+    	"vendor-dir": "source/php/vendor"
+    },
+    "require": {},
+    "autoload": {
+	    "psr-4": {
+	        "KnowitToolsTest\\": "source/php"
+	    }
+	}
+}
